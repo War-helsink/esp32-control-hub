@@ -7,8 +7,6 @@
 #include "api/HttpApi.h"
 #include "api/EventsApi.h"
 
-unsigned long lastPing = 0;
-
 void setup() {
   Serial.begin(115200);
 
@@ -23,8 +21,5 @@ void setup() {
 }
 
 void loop() {
-  if (millis() - lastPing > Config::SSE_HEARTBEAT_MS) {
-    EventsApi::pushMessage("{\"ping\":true}");
-    lastPing = millis();
-  }
+
 }
