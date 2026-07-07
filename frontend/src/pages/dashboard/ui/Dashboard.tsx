@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { ChevronDown, ChevronUp } from "lucide-react";
 import {
 	Card,
 	CardContent,
@@ -8,7 +9,6 @@ import {
 	Badge,
 	Button,
 } from "@/shared/ui";
-import { ChevronDown, ChevronUp } from "lucide-react";
 import { features } from "../config";
 
 export const DashboardPage: React.FC = () => {
@@ -94,7 +94,7 @@ export const DashboardPage: React.FC = () => {
 								</div>
 							</CardHeader>
 
-							<CardContent className="space-y-3 flex-grow">
+							<CardContent className="space-y-3 grow">
 								<p className="text-sm text-muted-foreground">
 									{item.description}
 								</p>

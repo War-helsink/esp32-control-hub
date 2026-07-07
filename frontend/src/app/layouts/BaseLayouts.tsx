@@ -1,5 +1,5 @@
 import { Outlet } from "react-router";
-import { AppSidebar, AppSidebarInset } from "@/widgets/sidebar";
+import { AppSidebar, AppSidebarInset } from "@/features/sidebar";
 import { SidebarProvider } from "@/shared/ui";
 
 const BaseLayouts: React.FC = () => {

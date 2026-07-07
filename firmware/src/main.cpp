@@ -3,23 +3,35 @@
 #include "core/WiFiManager.h"
 #include "core/ServerManager.h"
 #include "core/Config.h"
+#include "core/Logger.h"
+#include "core/LedManager.h"  
 
 #include "api/HttpApi.h"
 #include "api/EventsApi.h"
 
+static const char* TAG = "MAIN";
+
 void setup() {
-  Serial.begin(115200);
+
+  // Init
+  Logger::init();
+  LedManager::setStatus(LedStatus::Warning);
 
   WiFiManager::initAP();
-
   ServerManager::init();
   HttpApi::registerRoutes();
+
+  // Begin
   EventsApi::begin();
   ServerManager::begin();
 
-  Serial.println("Server started at 192.168.1.1");
+  delay(1500);
+  LedManager::setStatus(LedStatus::Default);
+
+  LOG_I(TAG, "Server started at 192.168.1.1");
 }
 
 void loop() {
-
+  LedManager::update(); 
+  delay(10);
 }
