@@ -1,6 +1,6 @@
 <p align="center">
   <img
-    src="frontend/public/favicon.png"
+    src="frontend/public/logo.png"
     alt="Packet Bat logo"
     width="220"
   />

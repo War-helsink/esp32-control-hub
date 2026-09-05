@@ -21,7 +21,7 @@ export const AppSidebar: React.FC = () => {
 								<div className="flex aspect-square size-12 items-center justify-center rounded-lg bg-background">
 									<img
 										className="size-10 object-contain"
-										src="/favicon.png"
+										src="/logo.png"
 										alt="Icon"
 									/>
 								</div>
