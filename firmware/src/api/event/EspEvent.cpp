@@ -1,0 +1,3 @@
+#include "EspEvent.h"
+
+ESP_EVENT_DEFINE_BASE(ESP_FRAME_EVENT);
