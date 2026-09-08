@@ -9,7 +9,7 @@ namespace wifi {
 
     EapolPacket *parseEapolPacket(DataFrame *frame);
     EapolKeyPacket *parseEapolKeyPacket(EapolPacket *eapolPacket);
-    PmkidItemT *parsePmkid(EapolKeyPacket *eapolKey);
+    PmkidItem *parsePmkid(EapolKeyPacket *eapolKey);
     bool isArrayZero(uint8_t *array, unsigned size);
     bool isFrameBssidMatching(const wifi_promiscuous_pkt_t *frame, const uint8_t *bssid);
     const char* encryptionTypeToLabel(wifi_auth_mode_t type);

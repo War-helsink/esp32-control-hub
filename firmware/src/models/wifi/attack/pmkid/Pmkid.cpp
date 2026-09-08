@@ -24,13 +24,11 @@ void WifiAttackPmkid::start(const char *ssid) {
         nullptr
     );
 
-
     LedManager::setStatus(LedStatus::Error);
     LOG_I(TAG, "WiFi attack pmkid started");
 }
 
 void WifiAttackPmkid::stop() {
-
     esp_wifi_set_promiscuous(false);
     esp_wifi_set_promiscuous_rx_cb(nullptr);
 
@@ -56,7 +54,7 @@ void WifiAttackPmkid::onPacketReceived(void *buf, wifi_promiscuous_pkt_type_t ty
     EapolKeyPacket *eapolKeyPacket = wifi::parseEapolKeyPacket(eapolPacket);
     if (eapolKeyPacket == NULL) return;
 
-    PmkidItemT *pmkidItems;
+    PmkidItem *pmkidItems;
     if((pmkidItems = wifi::parsePmkid(eapolKeyPacket)) == NULL){
         return;
     }
@@ -65,12 +63,23 @@ void WifiAttackPmkid::onPacketReceived(void *buf, wifi_promiscuous_pkt_type_t ty
         ESP_FRAME_EVENT,
         DATA_FRAME_EVENT_PMKID,
         &pmkidItems,
-        sizeof(PmkidItemT *),
+        sizeof(PmkidItem *),
         portMAX_DELAY
     );
 }
 
 void WifiAttackPmkid::pmkidExitConditionHandler(void *args, esp_event_base_t eventBase, int32_t eventId, void *eventData) {
-    LOG_I(TAG, "Pmkid packet true");
-    PmkidItemT *pmkidItemHead = *(PmkidItemT **) eventData;
+    LOG_I(TAG, "Got PMKID, stopping attack...");
+
+    //Add stop PMKID attack
+
+
+    PmkidItem *pmkidItemHead = *(PmkidItem **) eventData;
+
+    PmkidItem *pmkidItem = pmkidItemHead;
+
+    unsigned pmkidItemCount = 1; 
+    while((pmkidItem = pmkidItem->next) != NULL){
+        pmkidItemCount++;
+    }
 }

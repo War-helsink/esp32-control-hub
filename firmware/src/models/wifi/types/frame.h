@@ -110,7 +110,7 @@ enum EapolPacketTypes{
 typedef struct PmkidItem {
   uint8_t pmkid[16];
   struct PmkidItem *next;
-} PmkidItemT;
+} PmkidItem;
 
 struct __attribute__((__packed__)) KeyDataField {
   uint8_t type;

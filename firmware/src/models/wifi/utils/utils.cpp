@@ -1,14 +1,13 @@
 #include "Arduino.h"
 #include "WiFi.h"
 #include "esp_wifi.h"
-
 #include "utils.h"
 
-static PmkidItemT *parsePmkidFromKeyData(uint8_t *keyData, const uint16_t length){
+static PmkidItem *parsePmkidFromKeyData(uint8_t *keyData, const uint16_t length){
     uint8_t *keyDataIndex = keyData;
     uint8_t *keyDataMaxIndex = keyData + length;
 
-    PmkidItemT *pmkid_item_head = NULL;
+    PmkidItem *pmkid_item_head = NULL;
     KeyDataField *keyDataField;
     do{
         keyDataField = (KeyDataField *) keyDataIndex;
@@ -35,7 +34,7 @@ static PmkidItemT *parsePmkidFromKeyData(uint8_t *keyData, const uint16_t length
         }
 
         ESP_LOGI(TAG, "Found PMKID: ");
-        PmkidItemT *pmkid_item = (PmkidItemT *) malloc(sizeof(PmkidItemT));
+        PmkidItem *pmkid_item = (PmkidItem *) malloc(sizeof(PmkidItem));
         pmkid_item->next = pmkid_item_head;
         pmkid_item_head = pmkid_item;
         for(unsigned i = 0; i < 16; i++){
@@ -95,7 +94,7 @@ namespace wifi {
         return (EapolKeyPacket *) eapolPacket->packetBody;
     }
 
-    PmkidItemT *parsePmkid(EapolKeyPacket *eapolKey) {
+    PmkidItem *parsePmkid(EapolKeyPacket *eapolKey) {
         if(eapolKey->keyDataLength == 0){
             ESP_LOGD(TAG, "Empty Key Data");
             return NULL;

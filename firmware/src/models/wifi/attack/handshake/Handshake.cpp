@@ -95,7 +95,7 @@ void WifiAttackHandshake::attackMethodStart(){
     switch(_type){
         case HandshakeType::Deauth:{
             LOG_I(TAG, "Fallback to Deauth");
-            WifiAttackDeauth::startTimer(5);
+            WifiAttackDeauth::startTimer(20);
             break;
         }
         case HandshakeType::Broadcast:{
