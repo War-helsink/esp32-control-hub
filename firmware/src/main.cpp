@@ -5,10 +5,12 @@
 #include "core/Config.h"
 #include "core/Logger.h"
 #include "core/LedManager.h"
+#include "core/DisplayManager.h"
 
 static const char* TAG = "MAIN";
 
 void setup() {
+  DisplayManager::init();
 
   // Init
   Logger::init();
@@ -27,6 +29,7 @@ void setup() {
 }
 
 void loop() {
+  DisplayManager::update();
   LedManager::update(); 
   delay(10);
 }
